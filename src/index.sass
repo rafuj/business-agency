@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+/*Variables*/
+$title: #031e44
+$base: #FF6A00
+$heading: 'Nunito', sans-serif
+/*Banner Section*/
+*, body, html
+    margin: 0
+    padding: 0
+
+h1, h2, h3, h4, h5, h6
+    &.css-1sra7t5-MuiTypography-root
+        line-height: 1.3
+        font-family: $heading
+
+h1, h2, h3, h4
+    &.css-1sra7t5-MuiTypography-root
+        font-weight: 700
+
+.text--base
+    color: $base
+.banner-section
+    position: relative
+    padding: 280px 0 205px
+    background-size: cover
+    background-position: center center
+    background-repeat: no-repeat
+    &::before
+        position: absolute
+        content: ''
+        inset: 0
+        opacity: .9
+        background: $title
+
+.cmn__btn
+    color: #fff
+    line-height: 24px
+    padding: 12px 35px 9px
+    -webkit-border-radius: 5px
+    -moz-border-radius: 5px
+    border-radius: 5px
+    background: $base
+    border: 2px solid transparent
+    font-size: 16px
+    text-transform: capitalize
+    overflow: hidden
+    position: relative
+    display: inline-flex
+    align-items: center
+    justify-content: center
+    text-decoration: none
+    font-family: $heading
+    &:nth-of-type(even):not(:hover)
+        background: transparent
+        color: $base
+        font-weight: 700
+        text-decoration: underline
+        border-color: $base
+
+.btn__grp
+    margin: -5px
+    margin-top: 25px
+    .cmn__btn
+        margin: 5px
