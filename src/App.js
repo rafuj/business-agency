@@ -1,6 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import About from "./About";
 import Banner from "./Banner";
+import FeatureSection from "./FeatureSection";
+import PricingPlan from "./PricingPlan";
 
 export default function App() {
 	return (
@@ -12,6 +15,9 @@ export default function App() {
 						element={
 							<>
 								<Banner />
+								<About />
+								<FeatureSection />
+								<PricingPlan />
 							</>
 						}
 					/>

@@ -1,36 +1,192 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700&display=swap')
 /*Variables*/
 $title: #031e44
 $base: #FF6A00
+$heading-color: #082032
+$para-color: #666666
+$base-color: #FF6A00
+$base-color-two: #082032
+$section-bg: #F0F3F5
+$body-bg: #fff
+$border-color: #dadce0
+$primary: #7367f0
+$secondary: #868e96
+$success: #28c76f
+$danger: #ea5455
+$warning: #ff9f43
+$info: #1e9ff2
+$dark: #082032
+$light: #bcc7da
+$muted: #a0a0a0
+
 $heading: 'Nunito', sans-serif
+$body: 'Nunito', sans-serif
+
+/*Function*/
+$font-base: 16px
+@function rem($target, $context: $font-base) 
+  @if $target == 0 
+    @return 0
+  @return $target / $context + 0rem
+
+/*Mixins*/    
+=transform($property)
+  -webkit-transform: $property
+  -ms-transform: $property
+  transform: $property
+
+=border-radius($property)
+  border-radius: $property
+  -webkit-border-radius: $property
+  -moz-border-radius: $property
+  -ms-border-radius: $property
+  -o-border-radius: $property
+
+=transition($property)
+  -webkit-transition: $property
+  -o-transition: $property
+  transition: $property
+
+=flexWidth($property)
+  flex: 0 0 $property
+  -ms-flex: 0 0 $property
+  max-width: $property
+
+=d-flex 
+  display: -ms-flexbox
+  display: flex
+  -ms-flex-wrap: wrap
+  flex-wrap: wrap
+
+=position
+  position: absolute
+  top: 0
+  left: 0
+  width: 100% 
+  height: 100%
+
+=positionTwo
+  position: absolute
+  content: ''
+  top: 0
+  left: 0
+  width: 100% 
+  height: 100%
+
+=object-fit 
+  object-fit: cover 
+  -o-object-fit: cover 
+  object-position: center 
+  -o-object-position: center
+
+=animation($property)
+  animation: $property
+  -webkit-animation: $property
+  -moz-animation: $property
+
+=font($size, $weight, $transform)
+  font-size: $size
+  font-weight: $weight
+  text-transform: $transform
+
+=text-line-1
+  display: -webkit-box
+  -webkit-line-clamp: 1
+  -webkit-box-orient: vertical
+  overflow: hidden
+  text-overflow: ellipsis
+=text-line-2
+  display: -webkit-box
+  -webkit-line-clamp: 2
+  -webkit-box-orient: vertical
+  overflow: hidden
+  text-overflow: ellipsis
+=text-line-3
+  display: -webkit-box
+  -webkit-line-clamp: 3
+  -webkit-box-orient: vertical
+  overflow: hidden
+  text-overflow: ellipsis
+
+// media query mixin 
+=max($value)
+  @media (max-width: $value)
+    @content
+
+=min($value)
+  @media (min-width: $value)
+    @content
+// keyframes mixin
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
+
+=placeholder($value)
+    &::-webkit-input-placeholder
+        color: $value
+    &::-moz-placeholder
+        color: $value
+    &:-ms-input-placeholder
+        color: $value
+    &:-moz-placeholder
+        color: $value
+
+=color($bg-color, $text-color) 
+    background-color: $bg-color
+    color: $text-color
+
+=grad-one
+    background: $base-color
+    background: -webkit-linear-gradient(135deg,#ff690f 0%,#ee4719 100%)
+    background: linear-gradient(135deg,#ff690f 0%,#ee4719 100%)    
+
 /*Banner Section*/
 *, body, html
     margin: 0
     padding: 0
+    box-sizing: border-box
 
-h1, h2, h3, h4, h5, h6
-    &.css-1sra7t5-MuiTypography-root
-        line-height: 1.3
-        font-family: $heading
+.MuiTypography-root
+    line-height: 1.2
+    font-family: $heading !important
 
 h1, h2, h3, h4
-    &.css-1sra7t5-MuiTypography-root
-        font-weight: 700
+    &.MuiTypography-root
+      font-weight: 700
+
+ul
+  list-style: none
+  li
+    list-style: none
 
 .text--base
     color: $base
+
 .banner-section
     position: relative
-    padding: 280px 0 205px
+    padding: 220px 0 180px
     background-size: cover
     background-position: center center
     background-repeat: no-repeat
+    .MuiContainer-root
+      max-width: rem(900px) !important
     &::before
         position: absolute
         content: ''
         inset: 0
         opacity: .9
         background: $title
+
+    +max(500px)
+      padding: 130px 0 120px
+.bg__section
+    background: #f7fbfe
 
 .cmn__btn
     color: #fff
@@ -50,11 +206,15 @@ h1, h2, h3, h4
     justify-content: center
     text-decoration: none
     font-family: $heading
-    &:nth-of-type(even):not(:hover)
+    transition: all ease .4s
+    font-weight: 700
+    &.outline:not(:hover)
         background: transparent
         color: $base
-        font-weight: 700
-        text-decoration: underline
+        border-color: $base
+    &:not(.outline):hover
+        background: transparent
+        color: $base
         border-color: $base
 
 .btn__grp
@@ -62,3 +222,380 @@ h1, h2, h3, h4
     margin-top: 25px
     .cmn__btn
         margin: 5px
+
+/*About Section*/    
+.about__video
+    position: relative
+    height: 100%
+    padding: 30px 30px 0 0
+    min-height: 320px
+    iframe
+        width: 100%
+        z-index: 1
+        position: relative
+        +border-radius(5px)
+        height: 100%
+    &::before
+        inset: 0 0 30px 30px
+        background: rgba($base, 0.2)
+        -webkit-border-radius: 5px
+        -moz-border-radius: 5px
+        border-radius: 5px
+        position: absolute
+        content: ''
+    img
+        width: 100%
+        height: 100%
+        object-fit: cover
+        -webkit-border-radius: 5px
+        border-radius: 5px
+
+.bg__section
+  .about__video
+    .thumb
+      &::before
+        background: #fff
+
+.video__button
+    top: 50%
+    left: 50%
+    -webkit-transform: translate(-50%, -50%)
+    -ms-transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%)
+    position: absolute
+    content: ''
+    width: 80px
+    height: 80px
+    z-index: 1
+    -webkit-border-radius: 50%
+    -moz-border-radius: 50%
+    border-radius: 50%
+    background: rgba($base, .73)
+    line-height: 85px
+    text-align: center
+    &::before, &::after
+        position: absolute
+        content: ""
+        width: 100%
+        height: 100%
+        left: 0
+        top: 0
+        border-radius: 74px
+        background: #1e90ff
+        opacity: 0.15
+        z-index: -10
+    &::before
+        -webkit-animation: inner-ripple 2000ms linear infinite
+        -moz-animation: inner-ripple 2000ms linear infinite
+        animation: inner-ripple 2000ms linear infinite
+    &::after
+        -webkit-animation: outer-ripple 2000ms linear infinite
+        -moz-animation: outer-ripple 2000ms linear infinite
+        animation: outer-ripple 2000ms linear infinite
+    i 
+        font-size: 24px
+        color: #fff
+
+@keyframes outer-ripple
+    0%
+        transform: scale(1)
+        filter: alpha(opacity=50)
+        opacity: 0.5
+        -webkit-transform: scale(1)
+        -moz-transform: scale(1)
+        -ms-transform: scale(1)
+        -o-transform: scale(1)
+    
+
+    80%
+        transform: scale(2.5)
+        filter: alpha(opacity=0)
+        opacity: 0
+        -webkit-transform: scale(2.5)
+        -moz-transform: scale(2.5)
+        -ms-transform: scale(2.5)
+        -o-transform: scale(2.5)
+    
+
+    100%
+        transform: scale(3.5)
+        filter: alpha(opacity=0)
+        opacity: 0
+        -webkit-transform: scale(3.5)
+        -moz-transform: scale(3.5)
+        -ms-transform: scale(3.5)
+        -o-transform: scale(3.5)
+    
+@keyframes inner-ripple
+    0%
+        transform: scale(1)
+        filter: alpha(opacity=50)
+        opacity: 0.5
+        -webkit-transform: scale(1)
+        -moz-transform: scale(1)
+        -ms-transform: scale(1)
+        -o-transform: scale(1)
+    
+
+    30%
+        transform: scale(1)
+        filter: alpha(opacity=50)
+        opacity: 0.5
+        -webkit-transform: scale(1)
+        -moz-transform: scale(1)
+        -ms-transform: scale(1)
+        -o-transform: scale(1)
+    
+
+    100%
+        transform: scale(1.5)
+        filter: alpha(opacity=0)
+        opacity: 0
+        -webkit-transform: scale(1.5)
+        -moz-transform: scale(1.5)
+        -ms-transform: scale(1.5)
+        -o-transform: scale(1.5)
+
+.MuiTypography-body
+  line-height: 1.5
+
+.section__header
+  margin-bottom: 30px
+  .section__cate
+    color: $base
+    margin-bottom: 15px
+    font-weight: 500
+    text-transform: capitalize
+    position: relative
+    &::before, &::after
+      display: inline-block
+      content: ''
+      width: 30px
+      height: 2px
+      background: $base
+      vertical-align: middle
+    &::before
+      margin-right: 20px
+    &::after
+      margin-left: 20px
+  .section__title
+    margin-bottom: 20px
+  &.center
+    max-width: 720px
+    margin-left: auto
+    margin-right: auto
+    text-align: center
+  +min(1200px)
+    margin-bottom: 50px
+
+.about__content
+  .section__header
+    +min(1200px)
+      margin-bottom: 30px
+
+.about__list
+  +d-flex
+  justify-content: space-between
+  margin-bottom: -15px
+  li
+    width: calc(50% - 30px)
+    font-size: 17px
+    font-family: $heading
+    list-style: none
+    margin-bottom: 15px
+    +max(500px)
+      width: 100%    
+  
+.MuiContainer-root
+  +min(1400px)
+    max-width: 1340px !important
+
+.feature-wrapper
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  .feature-area
+    width: calc((100% - 505px) / 2)
+    +max(1023px)
+      width: calc((100% - 400px) / 2)
+    +max(991px)
+      width: 50%
+    +max(575px)
+      width: 100%
+
+
+.feature-thumb
+    width: 505px
+    height: 573px
+    display: flex
+    align-items: center
+    justify-content: center
+    position: relative
+    +max(1023px)
+      width: 400px
+    +max(991px)
+      display: none
+    .thumb
+      inset: 0
+      position: absolute
+      content: ""
+      background: $base
+
+
+.feature-area
+  .feature-item
+    max-width: 350px
+    &:not(:last-child)
+      min-height: 230px
+      margin-bottom: 45px
+    +min(576px)
+      margin-left: 30px
+    +max(991px)
+      min-height: 0
+    +max(575px)
+      width: 100%
+      max-width: 100%
+      text-align: center
+      margin-bottom: 30px
+    .subtitle
+      margin-bottom: 10px
+      position: relative
+      text-transform: capitalize
+      font-size: 24px
+      margin-top: -4px
+      color: $base
+      &::before
+        width: 15px
+        height: 15px
+        -webkit-border-radius: 50%
+        -moz-border-radius: 50%
+        border-radius: 50%
+        background: $base
+        animation: pulse 3s linear infinite
+        -webkit-animation: pulse 3s linear infinite
+        -moz-animation: pulse 3s linear infinite
+        left: -60px
+        top: 10px
+        z-index: 1
+        position: absolute
+        content: ''
+        +max(991px)
+          display: none
+  &:nth-last-of-type(1)
+    .feature-item
+      &:nth-of-type(2)
+        .subtitle
+          &::before
+            left: -30px
+  &:nth-of-type(1)
+    .feature-item
+      +min(576px)
+        margin-left: 0
+        margin-right: 30px
+        text-align: right
+      &:nth-of-type(2)
+        .subtitle
+          &::before
+            left: calc(100% + 30px)
+      .subtitle
+        &::before
+          left: calc(100% + 70px)
+
++keyframes(pulse)
+    0%
+      box-shadow: 0 0 0 0 rgba($base, 0.851), 0 0 0 0 rgba($base, 0.851)
+      -webkit-box-shadow: 0 0 0 0 rgba($base, 0.851), 0 0 0 0 rgba($base, 0.851)
+      -moz-box-shadow: 0 0 0 0 rgba($base, 0.851), 0 0 0 0 rgba($base, 0.851)
+    40%
+      box-shadow: 0 0 0 20px rgba($base, 0), 0 0 0 0 rgba($base, 0.851)
+      -webkit-box-shadow: 0 0 0 20px rgba($base, 0), 0 0 0 0 rgba($base, 0.851)
+      -moz-box-shadow: 0 0 0 20px rgba($base, 0), 0 0 0 0 rgba($base, 0.851)
+    80%
+      box-shadow: 0 0 0 20px rgba($base, 0), 0 0 0 20px rgba($base, 0)
+      -webkit-box-shadow: 0 0 0 20px rgba($base, 0), 0 0 0 20px rgba($base, 0)
+      -moz-box-shadow: 0 0 0 20px rgba($base, 0), 0 0 0 20px rgba($base, 0)
+    100%
+      box-shadow: 0 0 0 0 rgba($base, 0), 0 0 0 0 rgba($base, 0)
+      -webkit-box-shadow: 0 0 0 0 rgba($base, 0), 0 0 0 0 rgba($base, 0)
+      -moz-box-shadow: 0 0 0 0 rgba($base, 0), 0 0 0 0 rgba($base, 0)
+      
+
+$white: #fff
+$transition: all ease .3s
+
+.plan__item
+    background: $section-bg
+    overflow: hidden
+    @include border-radius(10px)
+    .plan__header 
+        margin-left: -1px
+        margin-right: -1px
+        text-align: center
+        background: rgba($color:$base, $alpha:.2)
+        @include border-radius(10px 10px 0 0)
+        .plan__title 
+            padding: 30px 30px 20px
+            margin: 0
+            font-size: 20px
+        
+        margin-bottom: 50px
+        .plan__header-price 
+            padding: 0
+            .price 
+                font-weight: 600
+                width: 100px
+                height: 100px
+                text-align: center
+                @include border-radius(50%)
+                border: 5px solid rgba($color:$white, $alpha:.5)
+                font-family: $heading
+                font-size: 40px
+                line-height: 1
+                display: flex
+                flex-direction: column
+                flex-wrap: wrap
+                align-items: center
+                justify-content: center
+                margin: 0 auto
+                background: $base
+                @include transition($transition)
+                .title
+                    width: 100%
+                    color: $white
+                    line-height: 100px
+                
+                .info 
+                    font-size: 14px
+                    line-height: 20px
+                    width: 100%
+                    color: $title
+                    @include transform(translateY(50px))
+                    margin-top: -50px
+    .plan__body
+        padding: 15px 15px 24px
+        @include border-radius(0 0 10px 10px)
+        ul
+            margin-bottom: 25px
+            li
+                border-bottom: 1px dashed $border-color
+                padding: 7px 0
+                padding-left: 20px
+                font-size: 14px
+                position: relative
+                i
+                    position: absolute
+                    left: 0
+                    top: 13px
+                    &[class*="times"]
+                        color: $danger
+                    &[class*="check"]
+                        color: $success
+                &:first-child
+                    border-top: 1px dashed $border-color
+    border: 1px dashed rgba($color:$base, $alpha:.2)
+    border-top: none
+    &:hover
+        .plan__header
+            .plan__header-price
+                .price
+                    @include transform(translateY(50px)scale(1.07))
